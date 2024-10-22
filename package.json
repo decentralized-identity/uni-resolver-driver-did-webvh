@@ -1,7 +1,7 @@
 {
   "name": "uni-resolver-driver-did-example",
   "version": "1.0.0",
-  "description": "Example Universal Resolver Driver",
+  "description": "TrustDID Web Universal Resolver Driver",
   "main": "index.js",
   "scripts": {
     "prestart": "npm install",
@@ -13,6 +13,10 @@
   "license": "Unlicense",
   "private": true,
   "dependencies": {
-    "express": "4.18.1"
+    "elysia": "^1.0.27",
+    "trustdidweb-ts": "git://github.com/aviarytech/trustdidweb-ts#version-0.4"
+  },
+  "devDependencies": {
+    "bun-types": "^1.1.20"
   }
 }
