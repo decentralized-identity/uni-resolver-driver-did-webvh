@@ -1,21 +1,19 @@
-# Dockerfile for exampleorg/uni-resolver-driver-did-example
+# Dockerfile for brianorwhatever/uni-resolver-driver-did-tdw
 
-FROM node:10
-MAINTAINER Markus Sabadello <markus@danubetech.com>
+FROM oven/bun:1
 
-# build uni-resolver-driver-did-example
+# build uni-resolver-driver-did-tdw
 
 WORKDIR /usr/src/app
+
+COPY index.ts ./
 COPY package.json ./
-RUN npm install
-COPY . .
+COPY bun.lockb ./
 
-# variables
-
-ENV uniresolver_driver_did_example_exampleSetting=exampleSetting
+RUN bun install
 
 # done
 
 EXPOSE 8080
 
-CMD [ "node", "index.js" ]
+CMD [ "bun", "run", "start" ]
