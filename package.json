@@ -4,8 +4,7 @@
   "description": "TrustDID Web Universal Resolver Driver",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm install",
-    "start": "node index.js"
+    "start": "bun index.ts"
   },
   "keywords": [
     "swagger"
@@ -14,7 +13,7 @@
   "private": true,
   "dependencies": {
     "elysia": "^1.0.27",
-    "trustdidweb-ts": "git://github.com/aviarytech/trustdidweb-ts#version-0.4"
+    "trustdidweb-ts": "git://github.com/decentralized-identity/trustdidweb-ts"
   },
   "devDependencies": {
     "bun-types": "^1.1.20"

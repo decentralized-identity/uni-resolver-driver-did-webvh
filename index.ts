@@ -1,12 +1,23 @@
 import { Elysia } from 'elysia'
 import { resolveDID } from 'trustdidweb-ts';
 const app = new Elysia()
+  .get('/', () => {
+    return new Response('Hello World', {status: 200});
+  })
   .get('/1.0/identifiers/:identifier', async ({ params: { identifier } }: { params: { identifier: string } }) => {
+    console.log(`Resolving ${identifier}`)
     try {
-      const did = await resolveDID(identifier);
-      if (did.doc) {
-        console.log(`Resolved ${did.doc.id}`);
-        return new Response(JSON.stringify(did.doc, null, 2), {
+      const {doc, meta} = await resolveDID(identifier);
+      if (doc) {
+        console.log(`Resolved ${doc.id}`);
+        return Response.json({
+          didDocument: doc,
+          didResolutionMetadata: {
+            contentType: 'application/did+ld+json',
+            retrieved: new Date().toISOString()
+          },
+          didDocumentMetadata: meta
+        }, {
           headers: {
               'Content-Type': 'application/json'
           }
@@ -14,8 +25,8 @@ const app = new Elysia()
       }
       return new Response('Not Found', {status: 404});
     } catch (e: any) {
-      console.error(e.message)
-      return new Response('Internal Server Error', {status: 500});
+      console.log(`Failed to resolve ${identifier}: ${e.message}`)
+      return new Response(e.message, {status: 400});
     }
   })
   .listen(Bun.env.PORT || 8080)
