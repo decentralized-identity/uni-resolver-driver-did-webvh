@@ -19,8 +19,8 @@ did:webvh:QmPEQVM1JPTyrvEgBcDXwjK4TeyLGSX1PxjgyeAisdWM1p:gist.githubusercontent.
 ## Build and Run (Docker)
 
 ```
-docker build --platform linux/amd64 -f ./Dockerfile . -t brianrichter/uni-resolver-driver-did-webvh
-docker run -p 8080:8080 brianrichter/uni-resolver-driver-did-webvh
+docker build --platform linux/amd64 -f ./Dockerfile . -t uni-resolver-driver-did-webvh
+docker run -p 8080:8080 uni-resolver-driver-did-webvh
 curl -X GET http://localhost:8080/1.0/identifiers/did:webvh:QmPEQVM1JPTyrvEgBcDXwjK4TeyLGSX1PxjgyeAisdWM1p:gist.githubusercontent.com:brianorwhatever:9c4633d18eb644f7a47f93a802691626:raw
 ```
 
