@@ -1,7 +1,7 @@
 {
-  "name": "uni-resolver-driver-did-example",
+  "name": "uni-resolver-driver-did-webvh",
   "version": "1.0.0",
-  "description": "TrustDID Web Universal Resolver Driver",
+  "description": "did:webvh Universal Resolver Driver",
   "main": "index.js",
   "scripts": {
     "start": "bun index.ts"
