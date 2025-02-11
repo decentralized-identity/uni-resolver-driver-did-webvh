@@ -1,27 +1,27 @@
-![TDW Logo](https://bcgov.github.io/trustdidweb/tdw.jpg)
+![WebVH Logo](https://raw.githubusercontent.com/decentralized-identity/didwebvh/refs/heads/main/didwebvh.jpg)
 
-# Universal Resolver Driver: tdw
+# Universal Resolver Driver: webvh
 
-This is a [Universal Resolver](https://github.com/decentralized-identity/universal-resolver/) driver for **did:tdw** identifiers.
+This is a [Universal Resolver](https://github.com/decentralized-identity/universal-resolver/) driver for **did:webvh** identifiers.
 
 ## Specifications
 
 * [Decentralized Identifiers](https://w3c.github.io/did-core/)
-* [TrustDID Web](https://bcgov.github.io/trustdidweb/)
+* [did:webvh](https://identity.foundation/didwebvh/)
 
 ## Example DIDs
 
 ```
-did:tdw:QmbkyrrjFQ3Z2WiDfmesKpmeUhemaiqkWgwemovmVaTJfQ:demo.identifier.me:client:c9dd16b7-e079-43da-b0a9-36515e726c6f
-did:tdw:QmbnQXj7DhWFrmgjDPKZCybn8fkKW7Wze57SQHpwsSQ7NZ:gist.githubusercontent.com:brianorwhatever:9c4633d18eb644f7a47f93a802691626:raw
+did:webvh:QmahiuqDheWp6ZgRC66fsthiALqBFxvYQKk8uTQeqaBUQ2:anywhy.ca:webvh-05-large
+did:webvh:QmPEQVM1JPTyrvEgBcDXwjK4TeyLGSX1PxjgyeAisdWM1p:gist.githubusercontent.com:brianorwhatever:9c4633d18eb644f7a47f93a802691626:raw
 ```
 
 ## Build and Run (Docker)
 
 ```
-docker build -f ./Dockerfile . -t brianrichter/uni-resolver-driver-did-tdw
-docker run -p 8080:8080 brianrichter/uni-resolver-driver-did-tdw
-curl -X GET http://localhost:8080/1.0/identifiers/did:tdw:QmbnQXj7DhWFrmgjDPKZCybn8fkKW7Wze57SQHpwsSQ7NZ:gist.githubusercontent.com:brianorwhatever:9c4633d18eb644f7a47f93a802691626:raw
+docker build --platform linux/amd64 -f ./Dockerfile . -t brianrichter/uni-resolver-driver-did-webvh
+docker run -p 8080:8080 brianrichter/uni-resolver-driver-did-webvh
+curl -X GET http://localhost:8080/1.0/identifiers/did:webvh:QmPEQVM1JPTyrvEgBcDXwjK4TeyLGSX1PxjgyeAisdWM1p:gist.githubusercontent.com:brianorwhatever:9c4633d18eb644f7a47f93a802691626:raw
 ```
 
 ## Build and Run (Bun)
@@ -45,8 +45,9 @@ The driver returns the following metadata in addition to a DID document:
 * `nextKeyHashes`: The next key hashes of the DID prerotation keys.
 * `deactivated`: Whether the DID is deactivated.
 * `updateKeys`: The authorized update keys of the DID.
-* `witnesses`: The witnesses of the DID.
-* `witnessThreshold`: The witness threshold of the DID.
+* `witness`: An object expressing the witnesses of the DID.
+  * `witnesses`: The witnesses of the DID.
+  * `threshold`: The required threshold of the DID.
 
 ```
 {
@@ -62,7 +63,9 @@ The driver returns the following metadata in addition to a DID document:
     "updateKeys": [
       "z6MkphavubMiWGTLX63rfQPGdxsxNU7i2uEuMvEnmpnBT44p"
     ],
-    "witnesses": [],
-    "witnessThreshold": 0
+    "witness": {
+      "witnesses": [],
+      "threshold": 0
+    }
   }
 ```

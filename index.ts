@@ -1,5 +1,5 @@
 import { Elysia } from 'elysia'
-import { resolveDID } from 'trustdidweb-ts';
+import { resolveDID } from 'didwebvh-ts';
 const app = new Elysia()
   .get('/', () => {
     return new Response('Hello World', {status: 200});
@@ -31,4 +31,4 @@ const app = new Elysia()
   })
   .listen(Bun.env.PORT || 8080)
 
-console.log(`did:tdw resolver is running on port ${app.server?.port}`)
+console.log(`did:webvh resolver is running on port ${app.server?.port}`)

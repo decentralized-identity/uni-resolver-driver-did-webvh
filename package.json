@@ -12,8 +12,8 @@
   "license": "Unlicense",
   "private": true,
   "dependencies": {
-    "elysia": "^1.0.27",
-    "trustdidweb-ts": "git://github.com/decentralized-identity/trustdidweb-ts"
+    "didwebvh-ts": "^1.0.3",
+    "elysia": "^1.0.27"
   },
   "devDependencies": {
     "bun-types": "^1.1.20"

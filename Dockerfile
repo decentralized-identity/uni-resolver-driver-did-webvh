@@ -1,8 +1,8 @@
-# Dockerfile for brianorwhatever/uni-resolver-driver-did-tdw
+# Dockerfile for brianorwhatever/uni-resolver-driver-did-webvh
 
 FROM oven/bun:1
 
-# build uni-resolver-driver-did-tdw
+# build uni-resolver-driver-did-webvh
 
 WORKDIR /usr/src/app
 
