@@ -12,7 +12,8 @@
   "license": "Unlicense",
   "private": true,
   "dependencies": {
-    "didwebvh-ts": "^1.0.3",
+    "@stablelib/ed25519": "^2.0.2",
+    "didwebvh-ts": "^2.0.1",
     "elysia": "^1.0.27"
   },
   "devDependencies": {

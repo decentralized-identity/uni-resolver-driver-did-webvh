@@ -1,5 +1,25 @@
 import { Elysia } from 'elysia'
-import { resolveDID } from 'didwebvh-ts';
+import { resolveDID, SigningInput, SigningOutput, Verifier } from 'didwebvh-ts';
+import { verify as ed25519Verify } from '@stablelib/ed25519';
+
+class WebVHVerifier implements Verifier {
+  constructor() {
+  }
+
+  async sign(input: SigningInput): Promise<SigningOutput> {
+    throw new Error('Not implemented');
+  }
+
+  async verify(signature: Uint8Array, message: Uint8Array, publicKey: Uint8Array): Promise<boolean> {
+    try {
+      return ed25519Verify(publicKey, message, signature);
+    } catch (error) {
+      console.error('Ed25519 verification error:', error);
+      return false;
+    }
+  }
+}
+
 const app = new Elysia()
   .get('/', () => {
     return new Response('Hello World', {status: 200});
@@ -7,7 +27,9 @@ const app = new Elysia()
   .get('/1.0/identifiers/:identifier', async ({ params: { identifier } }: { params: { identifier: string } }) => {
     console.log(`Resolving ${identifier}`)
     try {
-      const {doc, meta} = await resolveDID(identifier);
+      const {doc, meta} = await resolveDID(identifier, {
+        verifier: new WebVHVerifier()
+      });
       if (doc) {
         console.log(`Resolved ${doc.id}`);
         return Response.json({
