@@ -86,4 +86,45 @@ Expected top-level JSON fields:
 - Keep the public API path aligned with Universal Resolver conventions: `/1.0/identifiers/:identifier`.
 - If you add new routes or behavior, document them in `README.md` and update this page as needed.
 
+### Plugging into the Universal Resolver
+
+To run this driver inside the Universal Resolver deployment, use the container image published to GitHub Container Registry (GHCR) by this repo's GitHub Actions.
+
+1) Find the latest image tag from GitHub Actions
+- Go to this repository on GitHub → Actions → the latest successful build workflow.
+- Open the job details and find the step labeled "output image tags".
+- Copy the full image reference, e.g.:
+  - `ghcr.io/decentralized-identity/uni-resolver-driver-did-webvh:v2.5.4-86a309b`
+
+2) Update Universal Resolver docker-compose
+- In your Universal Resolver checkout, open its `docker-compose.yml` and locate the service for this driver (or add one).
+- Replace the image reference with the tag copied above. Example snippet:
+  ```yaml
+  services:
+    driver-did-webvh:
+      image: ghcr.io/decentralized-identity/uni-resolver-driver-did-webvh:v2.5.4-86a309b
+      ports:
+        - "8154:8080"
+  ```
+
+3) Update Universal Resolver README (optional but recommended)
+- In the Universal Resolver repository, update its `README.md` where drivers are listed:
+  - Add/replace the did:webvh driver image reference with the GHCR tag you copied.
+  - Include a short example resolve URL if desired.
+
+4) Restart Universal Resolver
+```bash
+docker compose pull
+docker compose up -d --force-recreate
+```
+
+5) Test through Universal Resolver gateway
+```bash
+curl -s "http://localhost:8154/1.0/identifiers/<your-did-webvh>" | jq
+```
+
+Notes:
+- Always prefer the exact GHCR tag from the "output image tags" step to ensure deterministic deployments.
+- When a new version is published, repeat steps 1–2 to bump the image in Universal Resolver.
+
 
