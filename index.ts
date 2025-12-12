@@ -45,6 +45,19 @@ const app = new Elysia()
           }
         });
       }
+
+      // If meta contains an error, return 400 with error details
+      if (meta.error) {
+        return Response.json({
+          didResolutionMetadata: meta
+        }, {
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
+
       return new Response('Not Found', {status: 404});
     } catch (e: any) {
       console.log(`Failed to resolve ${identifier}: ${e.message}`)
